@@ -102,6 +102,7 @@ print("Tek sayılar:", odd)
 print("Çift sayılar:", even)
 
 
+
 # Görev 6
 
 ogrenciler = ["Ali", "Veli", "Ayşe", "Talat", "Zeynep", "Ece"]
@@ -130,7 +131,9 @@ for i in list_1:
 kume1 = set(["data", "python"])
 kume2 = set(["data", "function", "qcut", "lambda", "python", "miuul" ])
 
-if kume1.issuperset(kume2):
-    print("Ortak elemanlar:",kume1  & kume2)
-else:
-    print("2. küümenin 1. kümeden farkı:",kume2 - kume1)
+def set_func(set1, set2):
+    if set1.issuperset(set2):
+        print("Ortak elemanlar:",set1  & set2)
+    else:
+        print("2. küümenin 1. kümeden farkı:",set2 - set1)
+set_func(kume1, kume2)
