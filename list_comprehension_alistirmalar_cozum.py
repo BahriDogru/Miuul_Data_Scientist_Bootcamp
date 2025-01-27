@@ -1,4 +1,5 @@
 import seaborn as sns
+import pandas as pd
 df = sns.load_dataset("car_crashes")
 df.columns
 df.info()
@@ -6,6 +7,7 @@ df.info()
 # GÖREV 1: List Comprehension yapısı kullanarak car_crashes verisindeki numeric değişkenlerin isimlerini büyük harfe çeviriniz ve başına NUM ekleyiniz.
 
 df.columns = ["NUM_"+col.upper() if df[col].dtype != "O" else col.upper() for col in df.columns]
+df.columns = ["NUM_"+col.upper() if pd.api.types.is_numeric_dtype(df[col]) else col.upper() for col in df.columns]
 
 
 
@@ -45,3 +47,4 @@ new_list = [item for sublist in nested_list for item in sublist ]
 #4. Bir listedeki sayıları 3'e veya 5'e bölünebiliyorsa karesini al. Değilse listeye alma.
 numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 new_list2 = [item**2 for item in numbers if item %3 ==0 or item %5 ==0]
+
