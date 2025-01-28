@@ -12,7 +12,7 @@ df['SOURCE'].unique()
 df['SOURCE'].value_counts()
 
 # Soru 3:Kaç unique PRICE vardır?
-df['PRICE'].unique()
+df['PRICE'].nunique()
 
 # Soru 4:Hangi PRICE'dan kaçar tane satış gerçekleşmiş?
 df['PRICE'].value_counts()
@@ -60,13 +60,16 @@ agg_df = (df.pivot_table('PRICE',['COUNTRY', 'SOURCE', 'SEX', 'AGE'])).sort_valu
 
 
 ## GÖREV 4:
+
 # Indekste yer alan isimleri değişken ismine çeviriniz.
 # Üçüncü sorunun çıktısında yer alan PRICE dışındaki tüm değişkenler index isimleridir. Bu isimleri değişken isimlerine çeviriniz.
-# df.index  = df['PRICE'] değişken indexe atamak
+
 agg_df.reset_index(inplace=True) # index'teki değeri değişken yapmak
 
 ## GÖREV 5:
+
 # Age değişkenini kategorik değişkene çeviriniz ve agg_df’eekleyiniz.
+# Aralıkları ikna edici şekilde oluşturunuz.
 # Bunun için en çok kullanılan iki fonksiyon pd.cut() ve pd.qcut()
 
 agg_df['AGE_CAT'] = pd.cut(agg_df['AGE'], bins=[0,25,35,45,55], labels = ["0_25", "26_35", "36_45", "46_55"])
@@ -74,25 +77,36 @@ agg_df.info()
 
 
 ## GÖREV 6:
+
 # Yeni seviye tabanlı müşterileri (persona) tanımlayınız.
 # Yeni eklenecek değişkenin adı: customers_level_based
+# Birden fazla oluşan customers_level_based değişkenlerini groupby ile price ortalamalarını al
 
 agg_df['customers_level_based']  = [col[0].upper()+'_'+col[1].upper()+'_'+col[2].upper()+'_'+str(col[5]) for col in agg_df.values]
 drop_list = ['COUNTRY', 'SOURCE', 'SEX', 'AGE', 'AGE_CAT']
 agg_df.drop(drop_list, axis=1, inplace=True)
 # agg_df['customers_level_based'].value_counts()
-price_mean = pd.DataFrame(agg_df.groupby('customers_level_based')['PRICE'].mean())
+agg_df = agg_df.groupby('customers_level_based').agg({'PRICE':'mean'})
 
 
 
-# Görev 7:  Yeni müşterileri (personaları) segmentlere ayırınız
-price_mean = pd.DataFrame(agg_df.groupby('customers_level_based')['PRICE'].mean())
-price_mean['label'] = pd.qcut(price_mean['PRICE'],4, labels = ['D', 'C', 'B','A'])
-agg_df = pd.merge(agg_df, price_mean[['label']],on="customers_level_based")
+# Görev 7:
 
-agg_df.groupby('label').agg({'PRICE':['mean','max','sum']})
+# Yeni müşterileri (personaları) segmentlere ayırınız
+# Segmentleri SEGMENT isimlendirmesi ile değişken olarak agg_df’e ekleyiniz
+# Segmentlere göre group by yapıp price mean, max, sum’larını alınız
 
-# Görev 8:  Yeni gelen müşterileri sınıflandırıp, ne kadar gelir getirebileceklerini  tahmin ediniz.
+# price_mean = pd.DataFrame(agg_df.groupby('customers_level_based')['PRICE'].mean())
+# price_mean['SEGMENT'] = pd.qcut(price_mean['PRICE'],4, labels = ['D', 'C', 'B','A'])
+# agg_df = pd.merge(agg_df, price_mean[['SEGMENT']],on="customers_level_based")
+
+agg_df['SEGMENT'] = pd.qcut(agg_df['PRICE'],4, labels = ['D', 'C', 'B','A'])
+agg_df.groupby('SEGMENT').agg({'PRICE':['mean','max','sum']})
+
+# Görev 8:
+# Yeni gelen müşterileri sınıflandırıp, ne kadar gelir getirebileceklerini  tahmin ediniz.
+# 33 yaşında ANDROID kullanan bir Türk kadını hangi segmenteaittir ve ortalama ne kadar gelir kazandırması beklenir?
+# 35 yaşında IOS kullanan bir Fransız kadını hangi segmente aittir ve ortalama ne kadar gelir kazandırması beklenir?
 
 new_user = "TUR_ANDROID_FEMALE_26_35"
 agg_df[agg_df['customers_level_based'] == new_user]
