@@ -25,7 +25,7 @@ df.groupby('COUNTRY')['PRICE'].sum()
 
 
 # Soru 7:SOURCE türlerine göre satış sayıları nedir?
-df.groupby('SOURCE').agg({'PRICE': 'count'})
+df.groupby('SOURCE').value_counts()
 
 
 #  Soru 8:Ülkelere göre PRICE ortalamaları nedir?

@@ -44,7 +44,7 @@ df[(df['fare'] > 500)  | (df['age'] > 70)]
 df.isnull().sum()    # df.isnull().values.any() Hiç eksik değer var mı?
 
 # Görev 12:  who değişkenini dataframe’den çıkarınız.
-df.drop('who', axis=1)
+df.drop('who', axis=1, inplace=True)
 
 #  Görev13:  deck değikenindeki boş değerleri deck değişkenin en çok tekrar eden değeri (mode) ile doldurunuz.
 
@@ -99,7 +99,7 @@ new_df[['total_bill', 'tip','size']].mean()
 df['total_bill_tip_sum'] = df['total_bill'] + df['tip']
 
 #  Görev23:  total_bill_tip_sum değişkenine göre büyükten küçüğe sıralayınız ve ilk 30 kişiyi yeni bir dataframe'e atayınız.
-new_df = df.sort_values('total_bill_tip_sum')[:30]
+new_df = df.sort_values('total_bill_tip_sum', ascending=False)[:30]
 new_df.shape
 
 
