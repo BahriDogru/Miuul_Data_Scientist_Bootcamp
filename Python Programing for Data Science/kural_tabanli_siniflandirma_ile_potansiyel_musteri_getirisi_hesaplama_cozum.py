@@ -3,7 +3,7 @@
 
 # Soru 1: persona.csv dosyasını okutunuz ve veri seti ile ilgili genel bilgileri gösteriniz.
 import pandas as pd
-df = pd.read_csv('datas/persona.csv')
+df = pd.read_csv('datasets/persona.csv')
 df.info()
 df.describe().T
 
@@ -183,7 +183,6 @@ chipo['item_price'] = chipo['item_price'].astype(float)
 # Step 13.a. Check the item price type
 chipo['item_price'].dtype
 
-# Step 14. How much was the revenue for the period in the dataset?
 
 
 

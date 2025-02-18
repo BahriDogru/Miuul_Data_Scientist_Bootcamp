@@ -12,7 +12,7 @@ from flo_musteri_segmantasyonu_cozum import today_date
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', 500)
 pd.set_option('display.float_format', lambda x: '%.4f' % x)
-df_ = pd.read_csv('datas/flo_data_20k.csv')
+df_ = pd.read_csv('datasets/flo_data_20k.csv')
 df = df_.copy()
 
 

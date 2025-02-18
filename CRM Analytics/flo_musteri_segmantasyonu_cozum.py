@@ -4,7 +4,7 @@ import pandas as pd
 import datetime as dt
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width',500)
-df_ = pd.read_csv('datas/flo_data_20k.csv')
+df_ = pd.read_csv('datasets/flo_data_20k.csv')
 df = df_.copy()
 
 ######## Adım2 #######
