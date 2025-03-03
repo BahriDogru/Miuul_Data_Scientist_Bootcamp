@@ -159,7 +159,6 @@ df['timestamp'] = pd.to_datetime(df['timestamp'])
 last_movies_id = (df[(df['rating'] == 5.0) & (df['userId']== random_user)]. \
                sort_values(by='timestamp', ascending=False)['movieId'].tolist())[0]
 
-
 # Adım3:  User based recommendation bölümünde oluşturulan user_movie_df dataframe’ini seçilen film id’sine göre filtreleyiniz
 movie_name = df[df['movieId']==last_movies_id].iloc[0]['title']
 # movie_name = pd.Series(movie_user_df.columns).sample(1).values[0]

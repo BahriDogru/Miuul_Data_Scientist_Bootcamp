@@ -89,7 +89,6 @@ def arl_recommender(rules, hizmet, rec_count=5):
     for i, product in enumerate(sorted_rules["antecedents"]):
         if hizmet in product:
             recommendation_list.append(list(sorted_rules.iloc[i]["consequents"])[0])
-
     return recommendation_list[:rec_count]
 
 
