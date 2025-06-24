@@ -183,7 +183,7 @@ rfm_final.to_csv('rfm_final.csv', index=False)
 rfm['segment'].value_counts()
 last_df = pd.DataFrame()
 
-rfm[(rfm['segment'] == 'about_to_sleep') | (rfm['segment'] == 'cant_loose') | (rfm['segment'] == 'new_customers')].sort_values('recency', ascending=True)
+rfm[(rfm['segment'] == 'hibernating') | (rfm['segment'] == 'cant_loose') | (rfm['segment'] == 'new_customers')].sort_values('recency', ascending=True)
 
 
 
